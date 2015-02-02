@@ -1,7 +1,15 @@
 # notsoproxy
 
-I'm going to spend a few hours implementing the proxy service that Mark Smith (@zorkian) covered on the talk that he gave at linux.conf.au 2015. Thanks Mark, you did an excellent job!
+Proxy server written in Go after the talk given by Mark Smith (@zorkian) at
+linux.conf.au (2015).
 
-While I'm writing this I'm wondering what Linus Torvalds thinks about Go. I'm going to guess that he hates it.
+The server implements a simple pool of backend connections with a queue based
+on Go channels.
 
-Do not use this, just in case.
+Readers and writers are buffered for performance reasons, to avoid frequent IO.
+
+There is a global map that provide a simple statistics mechanism. Access to the
+map is synchronized with a mutex to avoid unexpected behaviors, e.g. crashes. Go
+maps are not controlled, so this was a necessary step because the map is
+accessed from different goroutines. It would be possible to obtain similar
+results with Go channels (share memory by communicating).
