@@ -8,8 +8,14 @@ on Go channels.
 
 Readers and writers are buffered for performance reasons, to avoid frequent IO.
 
-There is a global map that provide a simple statistics mechanism. Access to the
+There is a global map that provides a simple statistics mechanism. Access to the
 map is synchronized with a mutex to avoid unexpected behaviors, e.g. crashes. Go
 maps are not controlled, so this was a necessary step because the map is
 accessed from different goroutines. It would be possible to obtain similar
 results with Go channels (share memory by communicating).
+
+## TODO
+
+- Add tests
+- Warm queue
+- Use flags (listen, cpus, etc...)
