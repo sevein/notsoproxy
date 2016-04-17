@@ -53,7 +53,7 @@ func main() {
 	}
 	go http.Serve(l, nil)
 
-	// Initialize notsoproxy
+	// Initialize proxy
 	ln, err := net.Listen("tcp", listen)
 	if err != nil {
 		log.Fatalf("Failed to listen: %s", err)
